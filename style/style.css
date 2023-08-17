@@ -266,6 +266,12 @@ footer div p a{
     font-weight: bold;
 }
 
+.btn_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
 
 /* media queries */
 @media screen and (max-width: 768px) {
