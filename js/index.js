@@ -1,4 +1,3 @@
-// adding new task
 
 const update = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -7,16 +6,17 @@ const update = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" f
 
 const delete1 = `
 <svg onclick="deleteEvent(event)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
 </svg>
 `;
 
+// adding new task
 const handleAdd = (e) => {
     e.preventDefault();
     const name = document.querySelector("#name").value;
     const title = document.querySelector("#title").value;
     const option = document.querySelector("#category").value;
-    const tbody = document.querySelector("tbody");
+    const date = document.querySelector("#date").value;
     if (name === "" || title === "") {
         alert("Please fill all the fields");
         return;
@@ -25,15 +25,20 @@ const handleAdd = (e) => {
         alert("Please select a category");
         return;
     }
+    if(date === "") {
+        alert("Please select a date");
+        return;
+    }
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const todo = {
         isChecked: false,
         id: data.length + 1,
         name,
         title,
-        date: new Date().toLocaleDateString(),
+        date: date,
         category: option,
     };
+    const tbody = document.querySelector("tbody");
     const node = document.createElement("tr");
     node.innerHTML = `
         <td><input onchange="handleCheckBox(event)" type="checkbox"></td>
@@ -44,7 +49,7 @@ const handleAdd = (e) => {
         </td>
         <td>${title}</td>
         <td>${option}</td>
-        <td>${new Date().toLocaleDateString()}</td>
+        <td>${date}</td>
         <td>
         <div class="btn_container">
         <button onclick="modalClick(event)" class="btn btn-danger" id="update">
@@ -61,15 +66,14 @@ const handleAdd = (e) => {
     window.location.reload();
 };
 // update the todo list
-const handleModal = (e) => {
+const handleModal = () => {
     const body = document.querySelector("body");
     body.style.overflow = "auto";
     const modal = document.querySelector("#modal");
     modal.style.display = "none";
-    window.location.reload();
 };
 
-const handleUpdate = (e) => {
+const handleUpdate = () => {
     const id = document.querySelector("#id").value;
     const name2 = document.querySelector("#name2").value;
     const title2 = document.querySelector("#title2").value;
@@ -88,7 +92,7 @@ const handleUpdate = (e) => {
     console.log(data[findIndex]);
     localStorage.setItem("todo", JSON.stringify(data));
 
-    handleModal();
+    window.location.reload();
 };
 const modalClick = (e) => {
     const body = document.querySelector("body");
@@ -96,6 +100,7 @@ const modalClick = (e) => {
     const modal = document.querySelector("#modal");
     modal.style.display = "flex";
     const node = e.target.parentElement.parentElement.parentElement;
+    console.log(node);
     const td = node.querySelectorAll("td");
     const id = td[2].innerHTML;
     const name = td[3].innerHTML;
@@ -119,7 +124,7 @@ const deleteEvent = (e) => {
 };
 
 // search in the list
-const handleSearch = (e) => {
+const handleSearch = () => {
     const query = document.querySelector("#query").value;
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const searchedItems = data.filter(
@@ -160,21 +165,16 @@ const handleSearch = (e) => {
 };
 
 //filter in the list
-const handleFilter = (e) => {
+const handleFilter = () => {
     const option = document.querySelector("#cat").value;
-    if (option === "0") {
+    if (option === "default") {
         window.location.reload();
         return;
     }
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
-    let newData;
-    if (option === "All") {
-        newData = data;
-    } else {
-        newData = data.filter((item) => item.category === option);
-    }
+    let newData = data.filter((item) => item.category === option);
 
     newData.map((item, key) => {
         const node = document.createElement("tr");
@@ -205,6 +205,60 @@ const handleFilter = (e) => {
         tbody.appendChild(node);
     });
 };
+// sort by date
+const sortDate = () => {
+    const date_cat = document.querySelector("#date_cat").value;
+    console.log(date_cat);
+    const data = JSON.parse(localStorage.getItem("todo")) || [];
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
+    let newData 
+    if(date_cat === "0") {
+        window.location.reload();
+        return;
+    }
+
+    if(date_cat === "asc") {
+        newData = data.sort((a, b) => {
+            return new Date(a.date) - new Date(b.date);
+        });
+    }
+    if(date_cat === "desc") {
+        newData = data.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+        });
+    }
+
+    newData.map((item, key) => {
+        const node = document.createElement("tr");
+        if (item.isChecked) {
+            node.style.textDecoration = "line-through";
+            node.style.backgroundColor = "lightgreen";
+            node.style.opacity = 0.5;
+        }
+        node.innerHTML = `
+            <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
+                item.isChecked && "checked"
+            } ></td>
+            <td>${key + 1}</td>
+            <td style="display:none">${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.title}</td>
+            <td>${item.category}</td>
+            <td>${item.date}</td>
+            <td>
+            <div class="btn_container">
+            <button onclick="modalClick(event)" class="btn btn-danger" id="update">
+            ${update}
+            </button>
+            <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
+            </div>
+            </td>
+        `;
+        tbody.appendChild(node);
+    });
+};
+
 
 //checkox
 const handleCheckBox = (e) => {

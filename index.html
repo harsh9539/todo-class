@@ -22,7 +22,7 @@
         <section class="form" >
             <form onsubmit="handleAdd(event)">
                 <h1>Add Task</h1>
-                <label for="">Title</label>
+                <label  for="">Title</label>
                 <input id="name" class="input" type="text">
                 <label for="">Description</label>
                 <textarea id="title" class="input"  cols="30" rows="5"></textarea>
@@ -32,6 +32,8 @@
                     <option value="Work">Work</option>
                     <option value="Professional">Professional</option>
                 </select>
+                <label for="">Date</label>
+                <input id="date" type="date">
                 <div>
                     <button> Add </button>
                 </div>
@@ -68,9 +70,16 @@
                 </div>
 
                 <div>
+
+                    <select onchange="sortDate()" name="" id="date_cat">
+                        <option disabled selected>Deadlines</option>
+                        <option value="0">Default</option>
+                        <option value="asc">Upcoming</option>
+                        <option value="desc">Furthest</option>
+                    </select>
                     <select onchange="handleFilter()" name="" id="cat">
-                        <option value="0">Sort by Category</option>
-                        <option value="All">All</option>
+                        <option selected disabled value="0">Sort by Category</option>
+                        <option value="default">Default</option>
                         <option value="Work">Work</option>
                         <option value="Professional">Professional</option>
                     </select>
