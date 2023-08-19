@@ -66,7 +66,7 @@ const handleAdd = (e) => {
     title.value = "";
     option.value = "";
     date.value = "";
-    
+    window.location.reload();
 };
 // update the todo list
 const handleModal = () => {
