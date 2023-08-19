@@ -62,6 +62,11 @@ const handleAdd = (e) => {
     `;
     localStorage.setItem("todo", JSON.stringify([...data, todo]));
     tbody.appendChild(node);
+    name.value = "";
+    title.value = "";
+    option.value = "";
+    date.value = "";
+    
 };
 // update the todo list
 const handleModal = () => {
