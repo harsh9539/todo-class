@@ -19,13 +19,13 @@
             </ul>
     </nav>
     <div class="body">
-        <section class="form" >
+        <section class="form">
             <form onsubmit="handleAdd(event)">
                 <h1>Add Task</h1>
-                <label  for="">Title</label>
+                <label for="">Title</label>
                 <input id="name" class="input" type="text">
                 <label for="">Description</label>
-                <textarea id="title" class="input"  cols="30" rows="5"></textarea>
+                <textarea id="title" class="input" cols="30" rows="5"></textarea>
                 <label for="">Category</label>
                 <select name="" id="category">
                     <option value="0">----Select----</option>
@@ -48,14 +48,16 @@
                         <label for="">Title</label>
                         <input id="name2" class="input" type="text">
                         <label for="">Description</label>
-                        <textarea id="title2" class="input"  cols="30" rows="5"></textarea>
+                        <textarea id="title2" class="input" cols="30" rows="5"></textarea>
                         <select name="" id="category2">
                             <option value="0">----Select----</option>
                             <option value="Work">Work</option>
                             <option value="Professional">Professional</option>
                         </select>
+                        <label for="">Date</label>
+                        <input id="date2" type="date">
                         <div>
-                            <button onclick="handleUpdate()" id="confirm" > Update </button>
+                            <button onclick="handleUpdate()" id="confirm"> Update </button>
                             <button onclick="handleModal()" id="danger"> Cancel </button>
                         </div>
                     </form>

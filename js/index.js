@@ -1,4 +1,3 @@
-
 const update = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -25,7 +24,7 @@ const handleAdd = (e) => {
         alert("Please select a category");
         return;
     }
-    if(date === "") {
+    if (date === "") {
         alert("Please select a date");
         return;
     }
@@ -78,6 +77,7 @@ const handleUpdate = () => {
     const name2 = document.querySelector("#name2").value;
     const title2 = document.querySelector("#title2").value;
     const category2 = document.querySelector("#category2").value;
+    const date2 = document.querySelector("#date2").value;
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const findIndex = data.findIndex((item) => item.id === parseInt(id));
 
@@ -86,7 +86,7 @@ const handleUpdate = () => {
         id: data[findIndex].id,
         name: name2,
         title: title2,
-        date: data[findIndex].date,
+        date: date2,
         category: category2,
     };
     console.log(data[findIndex]);
@@ -106,10 +106,12 @@ const modalClick = (e) => {
     const name = td[3].innerHTML;
     const title = td[4].innerHTML;
     const category = td[5].innerHTML;
+    const date = td[6].innerHTML;
     document.querySelector("#id").value = id;
     document.querySelector("#name2").value = name;
     document.querySelector("#title2").value = title;
     document.querySelector("#category2").value = category;
+    document.querySelector("#date2").value = date;
 };
 
 // delete the list
@@ -212,18 +214,18 @@ const sortDate = () => {
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
-    let newData 
-    if(date_cat === "0") {
+    let newData;
+    if (date_cat === "0") {
         window.location.reload();
         return;
     }
 
-    if(date_cat === "asc") {
+    if (date_cat === "asc") {
         newData = data.sort((a, b) => {
             return new Date(a.date) - new Date(b.date);
         });
     }
-    if(date_cat === "desc") {
+    if (date_cat === "desc") {
         newData = data.sort((a, b) => {
             return new Date(b.date) - new Date(a.date);
         });
@@ -258,7 +260,6 @@ const sortDate = () => {
         tbody.appendChild(node);
     });
 };
-
 
 //checkox
 const handleCheckBox = (e) => {
