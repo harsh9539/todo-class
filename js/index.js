@@ -29,9 +29,10 @@ const handleAdd = (e) => {
         return;
     }
     const data = JSON.parse(localStorage.getItem("todo")) || [];
+    const idTime = new Date().getTime();
     const todo = {
         isChecked: false,
-        id: data.length + 1,
+        id: idTime,
         name,
         title,
         date: date,
@@ -42,7 +43,7 @@ const handleAdd = (e) => {
     node.innerHTML = `
         <td><input onchange="handleCheckBox(event)" type="checkbox"></td>
         <td>${data.length + 1}</td>
-        <td style="display:none">${data.length + 1}</td>
+        <td style="display:none">${idTime}</td>
         <td >
         ${name}
         </td>
@@ -66,6 +67,9 @@ const handleAdd = (e) => {
     document.querySelector("#title").value = "";
     document.querySelector("#category").value = "";
     document.querySelector("#date").value = "";
+    if(data.length === 0){
+        window.location.reload();
+    }
 };
 // update the todo list
 const handleModal = () => {
