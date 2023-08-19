@@ -80,7 +80,7 @@ const handleUpdate = () => {
     const date2 = document.querySelector("#date2").value;
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const findIndex = data.findIndex((item) => item.id === parseInt(id));
-
+    console.log("date2 ",date2);
     data[findIndex] = {
         isChecked: false,
         id: data[findIndex].id,
@@ -107,6 +107,7 @@ const modalClick = (e) => {
     const title = td[4].innerHTML;
     const category = td[5].innerHTML;
     const date = td[6].innerHTML;
+    console.log("date ",date);
     document.querySelector("#id").value = id;
     document.querySelector("#name2").value = name;
     document.querySelector("#title2").value = title;
