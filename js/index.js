@@ -62,7 +62,6 @@ const handleAdd = (e) => {
     `;
     localStorage.setItem("todo", JSON.stringify([...data, todo]));
     tbody.appendChild(node);
-    window.location.reload();
 };
 // update the todo list
 const handleModal = () => {
