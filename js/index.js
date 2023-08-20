@@ -9,6 +9,41 @@ const delete1 = `
 </svg>
 `;
 
+const addTask = (data)=>{
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
+    data.map((item, key) => {
+        const node = document.createElement("tr");
+        if (item.isChecked) {
+            node.style.textDecoration = "line-through";
+            node.style.backgroundColor = "lightgreen";
+            node.style.opacity = 0.5;
+        }
+        node.innerHTML = `
+            <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
+                item.isChecked && "checked"
+            } ></td>
+            <td>${key + 1}</td>
+            <td style="display:none">${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.title}</td>
+            <td>${item.category}</td>
+            <td>${item.date}</td>
+            <td>
+            <div class="btn_container">
+            <button onclick="modalClick(event)" class="btn btn-danger" id="update">
+            ${update}
+            </button>
+            <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
+            </div>
+            </td>
+        `;
+        tbody.appendChild(node);
+    });
+}
+
+
+
 // adding new task
 const handleAdd = (e) => {
     e.preventDefault();
@@ -142,78 +177,22 @@ const handleSearch = () => {
             item.name.toLowerCase().includes(query.toLowerCase()) ||
             item.title.toLowerCase().includes(query.toLowerCase())
     );
-    const tbody = document.querySelector("tbody");
-    tbody.innerHTML = "";
-    searchedItems.map((item, key) => {
-        const node = document.createElement("tr");
-        if (item.isChecked) {
-            node.style.textDecoration = "line-through";
-            node.style.backgroundColor = "lightgreen";
-            node.style.opacity = 0.5;
-        }
-        node.innerHTML = `
-            <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
-                item.isChecked && "checked"
-            }  ></td>
-            <td>${key + 1}</td>
-            <td style="display:none">${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.title}</td>
-            <td>${item.category}</td>
-            <td>${item.date}</td>
-            <td>
-            <div class="btn_container">
-            <button onclick="modalClick(event)" class="btn btn-danger" id="update">
-            ${update}
-            </button>
-            <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
-            </div>
-            </td>
-        `;
-        tbody.appendChild(node);
-    });
+    addTask(searchedItems);
 };
 
 //filter in the list
 const handleFilter = () => {
     const option = document.querySelector("#cat").value;
+    const data = JSON.parse(localStorage.getItem("todo")) || [];
     if (option === "default") {
-        window.location.reload();
+        addTask(data);
         return;
     }
-    const data = JSON.parse(localStorage.getItem("todo")) || [];
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
     let newData = data.filter((item) => item.category === option);
 
-    newData.map((item, key) => {
-        const node = document.createElement("tr");
-        if (item.isChecked) {
-            node.style.textDecoration = "line-through";
-            node.style.backgroundColor = "lightgreen";
-            node.style.opacity = 0.5;
-        }
-        node.innerHTML = `
-            <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
-                item.isChecked && "checked"
-            } ></td>
-            <td>${key + 1}</td>
-            <td style="display:none">${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.title}</td>
-            <td>${item.category}</td>
-            <td>${item.date}</td>
-            <td>
-            <div class="btn_container">
-            <button onclick="modalClick(event)" class="btn btn-update" id="update">
-            ${update}
-            </button>
-            <button onclick="deleteEvent(event)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
-            </div>
-            </td>
-        `;
-        tbody.appendChild(node);
-    });
+    addTask(newData);
 };
 // sort by date
 const sortDate = () => {
@@ -224,7 +203,7 @@ const sortDate = () => {
     tbody.innerHTML = "";
     let newData;
     if (date_cat === "0") {
-        window.location.reload();
+        addTask(data);
         return;
     }
 
@@ -238,35 +217,7 @@ const sortDate = () => {
             return new Date(b.date) - new Date(a.date);
         });
     }
-
-    newData.map((item, key) => {
-        const node = document.createElement("tr");
-        if (item.isChecked) {
-            node.style.textDecoration = "line-through";
-            node.style.backgroundColor = "lightgreen";
-            node.style.opacity = 0.5;
-        }
-        node.innerHTML = `
-            <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
-                item.isChecked && "checked"
-            } ></td>
-            <td>${key + 1}</td>
-            <td style="display:none">${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.title}</td>
-            <td>${item.category}</td>
-            <td>${item.date}</td>
-            <td>
-            <div class="btn_container">
-            <button onclick="modalClick(event)" class="btn btn-danger" id="update">
-            ${update}
-            </button>
-            <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
-            </div>
-            </td>
-        `;
-        tbody.appendChild(node);
-    });
+    addTask(newData);
 };
 
 //checkox
@@ -304,33 +255,5 @@ window.addEventListener("load", () => {
     } else {
         todos.style.display = "block";
     }
-    const tbody = document.querySelector("tbody");
-    data.map((item, key) => {
-        const node = document.createElement("tr");
-        if (item.isChecked) {
-            node.style.textDecoration = "line-through";
-            node.style.backgroundColor = "lightgreen";
-            node.style.opacity = 0.5;
-        }
-        node.innerHTML = `
-            <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
-                item.isChecked && "checked"
-            } ></td>
-            <td>${key + 1}</td>
-            <td style="display:none">${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.title}</td>
-            <td>${item.category}</td>
-            <td>${item.date}</td>
-            <td>
-            <div class="btn_container">
-            <button onclick="modalClick(event)" class="btn btn-danger" id="update">
-            ${update}
-            </button>
-            <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
-            </div>
-            </td>
-        `;
-        tbody.appendChild(node);
-    });
+    addTask(data);
 });
