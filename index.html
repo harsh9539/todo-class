@@ -27,15 +27,21 @@
                 <input id="name" class="input" type="text">
                 <label for="">Description</label>
                 <textarea id="title" class="input" cols="30" rows="5"></textarea>
-                <label for="">Category</label>
-                <select name="" id="category">
-                    <option value="0">----Select----</option>
-                    <option value="Work">Work</option>
-                    <option value="Professional">Professional</option>
-                </select>
-                <label for="">Date</label>
-                <input id="date" type="date">
-                <div>
+                <div class="catDate">
+                    <div>
+                        <label for="">Category</label>
+                        <select name="" id="category">
+                            <option value="0">----Select----</option>
+                            <option value="Work">Work</option>
+                            <option value="Professional">Professional</option>
+                        </select>
+                    </div>
+                    <div >
+                        <label for="">Date</label>
+                        <input id="date" type="date">
+                    </div>
+                </div>
+                <div id="btnDiv">
                     <button> Add </button>
                 </div>
             </form>
@@ -68,8 +74,8 @@
         <section id="todos" style="display: none;">
             <div id="feature">
                 <div>
-                    <input onblur="handleSearch()" id="query" placeholder="Search" type="text">
-                    <button onclick="handleSearch()">Search</button>
+                    <input onkeyup="handleSearch()" id="query" placeholder="Search" type="text">
+                    <!-- <button onclick="handleSearch()">Search</button> -->
                 </div>
 
                 <div>
@@ -115,6 +121,7 @@
     </footer>
 
     <script src="./js/index.js" type="text/javascript"></script>
+    <script src="./js/gugu.js"></script>
 </body>
 
 </html>

@@ -1,58 +1,68 @@
-
-
-html{
+html {
     height: 62.5%;
 }
 
-:root{
-    --primary:rgb(80, 131, 233);
-    --secondary:#fdfd96;
-    --danger:rgb(236, 109, 109);
-    --shadow:rgba(0, 0, 0, 0.2);
-    --green:rgb(85, 175, 85);
+:root {
+    --primary: rgb(80, 131, 233);
+    --secondary: #fdfd96;
+    --danger: rgb(236, 109, 109);
+    --shadow: rgba(0, 0, 0, 0.2);
+    --green: rgb(85, 175, 85);
+    --black: #0d1821ff;
+    --blue: #344966ff;
+    --pink: #e6aaceff;
+    --baby-powder: #f0f4efff;
+    --sage: #bfcc94ff;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--black);
+    color: var(--baby-powder);
 }
-.body{
+.body {
     padding: 20px 60px;
-
 }
-nav{
+nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 1rem 2rem;
     box-shadow: 2px 2px 10px var(--shadow);
 }
-nav ul{
+nav ul {
     display: flex;
     gap: 1rem;
 }
-nav ul li{
+nav ul li {
     list-style: none;
     cursor: pointer;
 }
 
-.form form{
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form form {
     display: flex;
     flex-direction: column;
+    background-color: var(--blue);
     gap: 1rem;
-    width: 100%;
+    width: 50%;
     padding: 2rem;
     box-shadow: 2px 2px 10px var(--shadow);
 }
 
-
-.form form .input{
+.form form .input {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -62,18 +72,36 @@ nav ul li{
     border-radius: 0.2rem;
     box-shadow: 2px 2px 10px var(--shadow);
 }
-.form form div button{
-    padding: 0.5rem 2rem;
+#btnDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+.form form div button {
+    padding: 0.5rem 3rem;
     border: none;
     outline: none;
-    border-radius: 0.2rem;
+    border-radius: 0.5rem;
     background-color: var(--primary);
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
+.catDate{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-select{
+.catDate div{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+select {
     padding: 0.5rem;
     border: none;
     outline: none;
@@ -85,7 +113,7 @@ select{
     color: var(--primary);
     background-color: white;
 }
-#date{
+#date {
     color: black;
     font-weight: bold;
     font-size: 1rem;
@@ -99,7 +127,7 @@ select{
     font-weight: bold;
     background-color: white;
 }
-#date2{
+#date2 {
     color: black;
     font-weight: bold;
     font-size: 1rem;
@@ -115,13 +143,14 @@ select{
 }
 
 /* features */
-#feature{
-    margin: 2rem 0;
+#feature {
+    margin: 6rem 0 2rem 0;
+    padding: 0rem 2.5rem;
     display: flex;
     justify-content: space-between;
 }
 
-#feature input{
+#feature input {
     padding: 0.5rem;
     border: none;
     outline: none;
@@ -134,10 +163,10 @@ select{
     background-color: white;
 }
 
-#feature input::placeholder{
+#feature input::placeholder {
     font-size: 0.8rem;
 }
-#feature button{
+#feature button {
     padding: 0.5rem 2rem;
     border: none;
     outline: none;
@@ -149,48 +178,53 @@ select{
     margin-left: 1rem;
 }
 
-
-
-
 /* table container */
-.table_container{
+.table_container {
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: var(--blue);
     gap: 1rem;
     padding: 2rem;
     box-shadow: 2px 2px 10px var(--shadow);
 }
-table,thead,tr,th{
+table,
+thead,
+tr,
+th {
     border-collapse: collapse;
     border-bottom: 1px solid black;
 }
-table,tbody,tr,td{
+table,
+tbody,
+tr,
+td {
     border-collapse: collapse;
+    color: var(--primary);
 }
-table thead th{
+table thead th {
     padding: 0.5rem;
 }
-table tbody tr{
+table tbody tr {
     background-color: white;
 }
-table tbody tr td{
+table tbody tr td {
     padding: 0.5rem;
     text-align: center;
     border-bottom: 1px solid black;
 }
-table tbody tr:nth-child(even){
+table tbody tr:nth-child(even) {
     background-color: #f5f5f5;
 }
-table tbody tr:nth-child(odd){
+table tbody tr:nth-child(odd) {
     background-color: white;
     cursor: pointer;
 }
-table tbody tr:hover{
+table tbody tr:hover {
     background-color: rgb(242, 242, 249);
     cursor: pointer;
 }
-table tbody tr td button{
+table tbody tr td button {
     padding: 0.5rem 2rem;
     border: none;
     outline: none;
@@ -201,9 +235,8 @@ table tbody tr td button{
     cursor: pointer;
 }
 
-
 /* modal */
-.modal{
+.modal {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -217,22 +250,23 @@ table tbody tr td button{
     align-items: center;
     z-index: 10;
 }
-#active{
+#active {
     display: flex;
 }
-.modal .modal_content{
+.modal .modal_content {
     width: 40rem;
     background-color: white;
     padding: 2rem;
+    background-color: var(--blue);
     border-radius: 0.2rem;
     box-shadow: 2px 2px 10px var(--shadow);
 }
 
-.modal .modal_content h1{
+.modal .modal_content h1 {
     margin-bottom: 2rem;
 }
 
-.modal .modal_content form{
+.modal .modal_content form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -241,8 +275,7 @@ table tbody tr td button{
     box-shadow: 2px 2px 10px var(--shadow);
 }
 
-
-.modal .modal_content form .input{
+.modal .modal_content form .input {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -252,7 +285,7 @@ table tbody tr td button{
     border-radius: 0.2rem;
     box-shadow: 2px 2px 10px var(--shadow);
 }
-.modal .modal_content form div button{
+.modal .modal_content form div button {
     padding: 0.5rem 2rem;
     border: none;
     outline: none;
@@ -262,39 +295,38 @@ table tbody tr td button{
     font-weight: bold;
     cursor: pointer;
 }
-#confirm{
+#confirm {
     background-color: var(--green);
 }
-#danger{
+#danger {
     background-color: var(--danger);
 }
-#update{
-    background-color: var(--secondary) !important;
+#update {
+    background-color: var(--sage) !important;
     color: black;
 }
 
-
-footer{
+footer {
     margin-top: 2rem;
     text-align: center;
     font-size: 1rem;
     color: #777;
     padding: 2rem 0;
 }
-footer div{
+footer div {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 }
-footer div p a{
+footer div p a {
     color: var(--primary);
     text-decoration: none;
     font-weight: bold;
 }
 
-.btn_container{
+.btn_container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -303,31 +335,42 @@ footer div p a{
 
 /* media queries */
 @media screen and (max-width: 768px) {
-    .body{
+    .body {
         padding: 20px 20px;
     }
-    .table_container{
+    .form form{
+        width: 90%;
+    }
+    .catDate{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .catDate div:last-child {
+        display: flex;
+        gap: 40px;
+    }
+    .table_container {
         overflow: scroll;
     }
-    .table_container::-webkit-scrollbar{
+    .table_container::-webkit-scrollbar {
         display: none;
     }
-    #feature{
+    #feature {
         flex-direction: column;
         gap: 1rem;
     }
-    #feature input{
+    #feature input {
         width: 100%;
         margin-bottom: 10px;
     }
-    #feature button{
+    #feature button {
         margin-left: 0;
     }
-    .modal .modal_content{
+    .modal .modal_content {
         width: 20rem;
         padding: 2rem 1rem;
     }
-    .modal .modal_content form{
+    .modal .modal_content form {
         width: 18rem;
         padding: 0.5rem;
     }
