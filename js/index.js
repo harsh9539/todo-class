@@ -18,31 +18,14 @@ const addTask = (data) => {
         node.classList.add("card");
         if (item.isChecked) {
             node.style.textDecoration = "line-through";
+            node.style.textDecorationColor = "black";
             node.style.opacity = 0.9;
         }
         else{
             node.style.textDecoration = 'none';
             node.style.opacity = 1;
         }
-        // node.innerHTML = `
-        //     <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
-        //         item.isChecked && "checked"
-        //     } ></td>
-        //     <td>${key + 1}</td>
-        //     <td style="display:none">${item.id}</td>
-        //     <td>${item.name}</td>
-        //     <td>${item.title}</td>
-        //     <td>${item.category}</td>
-        //     <td>${item.date}</td>
-        //     <td>
-        //     <div class="btn_container">
-        //     <button onclick="modalClick(event)" class="btn btn-danger" id="update">
-        //     ${update}
-        //     </button>
-        //     <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
-        //     </div>
-        //     </td>
-        // `;
+        const title = item.title.length > 27 ? item.title.slice(0,27) + "..." : item.title;
         node.innerHTML = `
         <div class="card-body">
             <input style="display:none" value="${item.id}"  />
@@ -54,7 +37,7 @@ const addTask = (data) => {
             </div>
             <div class="card-text">
                 <p class="card_p">Description</p>
-                <p>${item.title}</p>
+                <p>${title}</p>
                 <p class="card_p">Category</p>
                 <p>${item.category}</p>
                 <p class="card_p">Due Date</p>
@@ -99,6 +82,10 @@ const handleAdd = (e) => {
         alert("Please select a date");
         return;
     }
+    if(new Date(finalDate).getTime() < new Date().getTime()){
+        alert("Please enter a valid date");
+        return;
+    }
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const idTime = new Date().getTime();
     const todo = {
@@ -135,6 +122,8 @@ const handleAdd = (e) => {
     // `;
     const node = document.createElement("div");
     node.classList.add("card");
+    const title2 = title.length > 27 ? title.slice(0,27) + "..." : title;
+    console.log(title2);
     node.innerHTML = `
     <div class="card-body">
         <input style="display:none" value="${idTime}"  />
@@ -145,7 +134,7 @@ const handleAdd = (e) => {
         <div class="card-text">
         <p class="card_p">Description</p>
 
-            <p>${title}</p>
+            <p>${title2}</p>
             <p class="card_p">Category</p>
 
             <p>${finalOption}</p>
@@ -331,6 +320,7 @@ const handleCheckBox = (e) => {
     localStorage.setItem("todo", JSON.stringify(data));
     if (e.target.checked) {
         node2.style.textDecoration = "line-through";
+        node.style.textDecorationColor = "black";
         node2.style.opacity = 0.9;
     } else {
         node2.style.textDecoration = "none";
