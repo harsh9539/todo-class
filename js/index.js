@@ -10,42 +10,70 @@ const delete1 = `
 `;
 
 const addTask = (data) => {
-    const tbody = document.querySelector("tbody");
+    // const tbody = document.querySelector("tbody");
+    const tbody = document.querySelector("#cards_containers");
     tbody.innerHTML = "";
     data.map((item, key) => {
-        const node = document.createElement("tr");
+        const node = document.createElement("div");
+        node.classList.add("card");
         if (item.isChecked) {
             node.style.textDecoration = "line-through";
-            node.style.backgroundColor = "lightgreen";
-            node.style.opacity = 0.5;
+            node.style.opacity = 0.9;
         }
+        else{
+            node.style.textDecoration = 'none';
+            node.style.opacity = 1;
+        }
+        // node.innerHTML = `
+        //     <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
+        //         item.isChecked && "checked"
+        //     } ></td>
+        //     <td>${key + 1}</td>
+        //     <td style="display:none">${item.id}</td>
+        //     <td>${item.name}</td>
+        //     <td>${item.title}</td>
+        //     <td>${item.category}</td>
+        //     <td>${item.date}</td>
+        //     <td>
+        //     <div class="btn_container">
+        //     <button onclick="modalClick(event)" class="btn btn-danger" id="update">
+        //     ${update}
+        //     </button>
+        //     <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
+        //     </div>
+        //     </td>
+        // `;
         node.innerHTML = `
-            <td ><input onchange="handleCheckBox(event)" type="checkbox" ${
-                item.isChecked && "checked"
-            } ></td>
-            <td>${key + 1}</td>
-            <td style="display:none">${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.title}</td>
-            <td>${item.category}</td>
-            <td>${item.date}</td>
-            <td>
-            <div class="btn_container">
-            <button onclick="modalClick(event)" class="btn btn-danger" id="update">
-            ${update}
-            </button>
-            <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">${delete1}</button>
+        <div class="card-body">
+            <input style="display:none" value="${item.id}"  />
+            <div class="card-title">
+                <input onchange="handleCheckBox(event)" type="checkbox" ${
+                    item.isChecked && "checked"
+                } >
+                <h5>${item.name}</h5>
             </div>
-            </td>
+            <div class="card-text">
+                <p class="card_p">Description</p>
+                <p>${item.title}</p>
+                <p class="card_p">Category</p>
+                <p>${item.category}</p>
+                <p class="card_p">Due Date</p>
+                <p>${item.date}</p>
+            </div>
+            <div class="btn_container">
+                <button onclick="modalClick(event)" class="btn btn-danger" id="update">
+                ${update}
+                </button>
+                <button id="delete" onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                ${delete1}
+                </button>
+            </div>
+        </div>
         `;
         tbody.appendChild(node);
     });
 };
 
-const myInput = document.getElementById("query");
-myInput.addEventListener("input",(e)=>{
-    console.log(e.target.value);
-})
 
 // adding new task
 const handleAdd = (e) => {
@@ -81,29 +109,61 @@ const handleAdd = (e) => {
         date: finalDate,
         category: finalOption,
     };
-    const tbody = document.querySelector("tbody");
-    const node = document.createElement("tr");
+    // const tbody = document.querySelector("tbody");
+    const tbody = document.querySelector("#cards_containers");
+    // const node = document.createElement("tr");
+    // node.innerHTML = `
+    //     <td><input onchange="handleCheckBox(event)" type="checkbox"></td>
+    //     <td>${data.length + 1}</td>
+    //     <td style="display:none">${idTime}</td>
+    //     <td >
+    //     ${name}
+    //     </td>
+    //     <td>${title}</td>
+    //     <td>${finalOption}</td>
+    //     <td>${finalDate}</td>
+    //     <td>
+    //     <div class="btn_container">
+    //     <button onclick="modalClick(event)" class="btn btn-danger" id="update">
+    //     ${update}
+    //     </button>
+    //     <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    //     ${delete1}
+    //     </button>
+    //     </div>
+    //     </td>
+    // `;
+    const node = document.createElement("div");
+    node.classList.add("card");
     node.innerHTML = `
-        <td><input onchange="handleCheckBox(event)" type="checkbox"></td>
-        <td>${data.length + 1}</td>
-        <td style="display:none">${idTime}</td>
-        <td >
-        ${name}
-        </td>
-        <td>${title}</td>
-        <td>${finalOption}</td>
-        <td>${finalDate}</td>
-        <td>
-        <div class="btn_container">
-        <button onclick="modalClick(event)" class="btn btn-danger" id="update">
-        ${update}
-        </button>
-        <button onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        ${delete1}
-        </button>
+    <div class="card-body">
+        <input style="display:none" value="${idTime}"  />
+        <div class="card-title">
+            <input onchange="handleCheckBox(event)" type="checkbox" >
+            <h5>${name}</h5>
         </div>
-        </td>
+        <div class="card-text">
+        <p class="card_p">Description</p>
+
+            <p>${title}</p>
+            <p class="card_p">Category</p>
+
+            <p>${finalOption}</p>
+            <p class="card_p">Due Date</p>
+
+            <p>${finalDate}</p>
+        </div>
+        <div class="btn_container">
+            <button onclick="modalClick(event)" class="btn btn-danger" id="update">
+            ${update}
+            </button>
+            <button id="delete" onclick="deleteEvent(event)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            ${delete1}
+            </button>
+        </div>
+    </div>
     `;
+
     localStorage.setItem("todo", JSON.stringify([...data, todo]));
     tbody.appendChild(node);
     document.querySelector("#name").value = "";
@@ -151,31 +211,28 @@ const modalClick = (e) => {
     body.style.overflow = "hidden";
     const modal = document.querySelector("#modal");
     modal.style.display = "flex";
-    const node = e.target.parentElement.parentElement.parentElement;
-    console.log(node);
-    const td = node.querySelectorAll("td");
-    const id = td[2].innerHTML;
-    const name = td[3].innerHTML;
-    const title = td[4].innerHTML;
-    const category = td[5].innerHTML;
-    const date = td[6].innerHTML;
-    console.log("date ", date);
-    document.querySelector("#id").value = id;
-    document.querySelector("#name2").value = name;
-    document.querySelector("#title2").value = title;
-    document.querySelector("#category2").value = category;
-    document.querySelector("#date2").value = date;
+    const data = JSON.parse(localStorage.getItem("todo")) || [];
+    const node = e.target.parentElement.parentElement;
+    const td = node.querySelectorAll("input")[0].value;
+    const findItem = data.find((item) => item.id === parseInt(td));
+    document.querySelector("#id").value = findItem.id;
+    document.querySelector("#name2").value = findItem.name;
+    document.querySelector("#title2").value = findItem.title;
+    document.querySelector("#category2").value = findItem.category;
+    document.querySelector("#date2").value = findItem.date;
 };
 
 // delete the list
 const deleteEvent = (e) => {
-    const node = e.target.parentElement.parentElement.parentElement;
-    const td = node.querySelectorAll("td")[2];
-    const id = td.innerHTML;
+    const parent = document.querySelector("#cards_containers");
+    const node = e.target.parentElement.parentElement;
+    const node2 = e.target.parentElement.parentElement.parentElement;
+    const id = node.querySelectorAll("input")[0].value;
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const newData = data.filter((item) => item.id !== parseInt(id));
+    console.log(parent);
+    parent.removeChild(node2);
     localStorage.setItem("todo", JSON.stringify(newData));
-    window.location.reload();
 };
 
 // search in the list
@@ -229,8 +286,8 @@ const handleFilter = () => {
         addTask(data);
         return;
     }
-    const tbody = document.querySelector("tbody");
-    tbody.innerHTML = "";
+    // const tbody = document.querySelector("tbody");
+    // tbody.innerHTML = "";
     let newData = data.filter((item) => item.category === option);
 
     addTask(newData);
@@ -240,8 +297,6 @@ const sortDate = () => {
     const date_cat = document.querySelector("#date_cat").value;
     console.log(date_cat);
     const data = JSON.parse(localStorage.getItem("todo")) || [];
-    const tbody = document.querySelector("tbody");
-    tbody.innerHTML = "";
     let newData;
     if (date_cat === "0") {
         addTask(data);
@@ -263,22 +318,23 @@ const sortDate = () => {
 
 //checkox
 const handleCheckBox = (e) => {
-    console.log(e.target.checked);
+    // console.log(e.target.checked);
     const node = e.target.parentElement.parentElement;
-    const td = node.querySelectorAll("td")[2].innerHTML;
-    console.log(td);
+    const node2 = e.target.parentElement.parentElement.parentElement;
+    const td = node.querySelectorAll("input")[0].value;
+    // const td = node.querySelectorAll("td")[2].innerHTML;
+    // console.log(td);
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const findIndex = data.findIndex((item) => item.id === parseInt(td));
+    console.log(findIndex);
     data[findIndex].isChecked = e.target.checked;
     localStorage.setItem("todo", JSON.stringify(data));
     if (e.target.checked) {
-        node.style.textDecoration = "line-through";
-        node.style.backgroundColor = "lightgreen";
-        node.style.opacity = 0.5;
+        node2.style.textDecoration = "line-through";
+        node2.style.opacity = 0.9;
     } else {
-        node.style.textDecoration = "none";
-        node.style.backgroundColor = "white";
-        node.style.opacity = 1;
+        node2.style.textDecoration = "none";
+        node2.style.opacity = 1;
     }
 };
 

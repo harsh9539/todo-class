@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Josefin+Slab:wght@300;400;500;600;700&display=swap");
+
 html {
     height: 62.5%;
 }
@@ -13,6 +15,14 @@ html {
     --pink: #e6aaceff;
     --baby-powder: #f0f4efff;
     --sage: #bfcc94ff;
+    --primaryColor: #68cdd6;
+    --secondaryColor: #28b8c5;
+    --khaki: #d2b9aa;
+    --blackAshu: #070707;
+    --white: #fffafa;
+    --khakiLight: #f5eee9;
+    --textColor: #2a8a93;
+    --iconColor: #cccccc;
 }
 
 * {
@@ -22,9 +32,9 @@ html {
 }
 
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--black);
-    color: var(--baby-powder);
+    font-family: "Josefin Sans", sans-serif;
+    background-color: var(--white);
+    color: var(--secondaryColor);
 }
 .body {
     padding: 20px 60px;
@@ -36,6 +46,9 @@ nav {
     align-items: center;
     padding: 1rem 4rem;
     box-shadow: 2px 2px 10px var(--shadow);
+    background-color: var(--khakiLight);
+    position: fixed;
+    width: 100%;
 }
 nav ul {
     display: flex;
@@ -46,17 +59,19 @@ nav ul li {
     cursor: pointer;
 }
 
-.form{
+.form {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 100px;
 }
 
 .form form {
     display: flex;
     flex-direction: column;
-    background-color: var(--blue);
+    /* background-color: var(--blue); */
+    background-color: var(--khakiLight);
     gap: 1rem;
     width: 50%;
     padding: 2rem;
@@ -72,8 +87,9 @@ nav ul li {
     outline: none;
     border-radius: 0.2rem;
     box-shadow: 2px 2px 10px var(--shadow);
+    background-color: var(--white);
 }
-#btnDiv{
+#btnDiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,22 +97,22 @@ nav ul li {
     width: 100%;
 }
 .form form div button {
-    padding: 0.5rem 3rem;
+    padding: 0.8rem 5rem;
     border: none;
     outline: none;
     border-radius: 0.5rem;
-    background-color: var(--primary);
+    background-color: var(--secondaryColor);
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
-.catDate{
+.catDate {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.catDate div{
+.catDate div {
     display: flex;
     gap: 1rem;
     justify-content: center;
@@ -111,11 +127,11 @@ select {
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
-    color: var(--primary);
+    color: var(--secondaryColor);
     background-color: white;
 }
 #date {
-    color: black;
+    color: var(--secondaryColor);
     font-weight: bold;
     font-size: 1rem;
     padding: 0.5rem;
@@ -173,6 +189,57 @@ select {
     outline: none;
     border-radius: 0.2rem;
     background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+#feature2 {
+    padding: 0rem 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#feature2 input::placeholder {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+#iconInput {
+    background-color: wheat;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    border-radius: 0.2rem;
+    width: 15rem;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 2px 2px 10px var(--shadow);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: white;
+    opacity: 0.9;
+    color: rgb(68, 68, 68);
+}
+#feature2 input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: 0.9;
+    color: rgb(68, 68, 68);
+}
+#feature2 svg{
+    color: var(--secondaryColor);
+}
+#feature2 button {
+    padding: 0.5rem 2rem;
+    border: none;
+    outline: none;
+    border-radius: 0.2rem;
+    background-color: var(--secondaryColor);
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -245,7 +312,7 @@ table tbody tr td button {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     display: none;
     justify-content: center;
     align-items: center;
@@ -258,7 +325,7 @@ table tbody tr td button {
     width: 40rem;
     background-color: white;
     padding: 2rem;
-    background-color: var(--blue);
+    background-color: var(--khakiLight);
     border-radius: 0.2rem;
     box-shadow: 2px 2px 10px var(--shadow);
 }
@@ -299,13 +366,6 @@ table tbody tr td button {
 #confirm {
     background-color: var(--green);
 }
-#danger {
-    background-color: var(--danger);
-}
-#update {
-    background-color: var(--sage) !important;
-    color: black;
-}
 
 footer {
     margin-top: 2rem;
@@ -327,39 +387,123 @@ footer div p a {
     font-weight: bold;
 }
 
+#mobileCat {
+    display: none;
+}
+.catDate {
+    display: flex;
+}
+
+.cards_container {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--khakiLight);
+    padding: 1rem;
+    width: 20rem;
+    box-shadow: 2px 2px 10px var(--shadow);
+    cursor: pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 0.5rem;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+.card-title {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+.card-title input {
+    font-size: 30px;
+    height: 30px;
+    width: 25px;
+    background-color: var(--pink);
+    color: var(--pink);
+}
+.card-title h5 {
+    font-size: 30px;
+    color: var(--khaki);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.card_p {
+    color: var(--khaki);
+    font-size: 20px;
+}
+.card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--secondaryColor);
+}
+.card-text p:nth-child(even) {
+    font-family: "Josefin Slab", sans-serif;
+}
 .btn_container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 }
-#mobileCat{
-    display: none;
+#update {
+    padding: 0.5rem 3rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: var(--sage);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
-.catDate{
-    display: flex;
+#delete {
+    padding: 0.5rem 3rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: var(--danger);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
 /* media queries */
 @media screen and (max-width: 1110px) {
-    .form form{
+    .form form {
         width: 70%;
     }
 }
 @media screen and (max-width: 770px) {
-    nav{
+    nav {
         justify-content: space-between;
         padding: 1rem 2rem;
     }
-    .catDate{
+    .catDate {
         display: none;
     }
     .body {
         padding: 20px 20px;
     }
-    .form form{
+    .form form {
         width: 90%;
     }
-    .catDate{
+    .catDate {
         flex-direction: column;
         gap: 20px;
     }
@@ -381,7 +525,7 @@ footer div p a {
         width: 100%;
         margin-bottom: 10px;
     }
-    #sortFilter{
+    #sortFilter {
         justify-content: space-between;
     }
     #feature button {
@@ -395,8 +539,14 @@ footer div p a {
         width: 18rem;
         padding: 0.5rem;
     }
-    #mobileCat{
+    #mobileCat {
         display: flex;
+    }
+    #iconInput{
+        width: 10rem;
+    }
+    #feature2 button{
+        padding: 0.5rem 0.5rem;
     }
     /* .modal .modal_content form .input{
         width: 20rem;

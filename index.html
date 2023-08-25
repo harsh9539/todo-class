@@ -16,7 +16,21 @@
         </div>
         <div>
             <ul>
-                <li>Home</li>
+                <li>
+                    <div id="feature2">
+                        <div id="iconInput">
+                            <input onchange="handleSearch()" onkeyup="handleSearch()" id="query" placeholder="Search"
+                                type="text">
+                            <svg id="voiceSearch" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                                <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z" />
+                                <path
+                                    d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z" />
+                            </svg>
+                        </div>
+                        <button onclick="handleSearch()">Search</button>
+                    </div>
+                </li>
             </ul>
     </nav>
     <div class="body">
@@ -31,7 +45,7 @@
                     <div>
                         <label for="">Category</label>
                         <select name="" id="category">
-                            <option style="display: none;" disabled selected value="0">----Select----</option>
+                            <option style="display: none;" disabled selected value="0">Select</option>
                             <option value="Work">Work</option>
                             <option value="Professional">Professional</option>
                             <option value="Game">Game</option>
@@ -58,7 +72,7 @@
                     <input id="date" class="dateMob" type="date">
                 </div>
                 <div id="btnDiv">
-                    <button> Add </button>
+                    <button> Add</button>
                 </div>
             </form>
         </section>
@@ -92,20 +106,6 @@
         </div>
         <section id="todos" style="display: none;">
             <div id="feature">
-                <div>
-                    <input  onchange="handleSearch()" onkeyup="handleSearch()" id="query" placeholder="Search"
-                        type="text">
-                    <button id="voiceSearch">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
-                            class="bi bi-mic-fill" viewBox="0 0 16 16">
-                            <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z" />
-                            <path
-                                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z" />
-                        </svg>
-                    </button>
-                    <button onclick="handleSearch()">Search</button>
-                </div>
-
                 <div style="display: flex; gap: 20px;" id="sortFilter">
 
                     <select onchange="sortDate()" name="" id="date_cat">
@@ -116,7 +116,7 @@
                     </select>
                     <select onchange="handleFilter()" name="" id="cat">
                         <option style="display: none;" selected disabled value="0">Sort by Category</option>
-                        <option value="default">Default</option>
+                        <option value="default">All</option>
                         <option value="Work">Work</option>
                         <option value="Professional">Professional</option>
                         <option value="Game">Game</option>
@@ -125,22 +125,7 @@
                     </select>
                 </div>
             </div>
-            <section class="table_container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 5%;"></th>
-                            <th style="width: 10%;">No</th>
-                            <th style="width: 20%;">Title</th>
-                            <th style="width: 20%;">Description</th>
-                            <th style="width: 10%;">Category</th>
-                            <th style="width: 10%;">Date</th>
-                            <th style="width: 20%;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+            <section id="cards_containers" class="cards_container">
             </section>
         </section>
     </div>
