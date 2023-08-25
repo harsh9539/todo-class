@@ -548,6 +548,10 @@ footer div p a {
     #feature2 button{
         padding: 0.5rem 0.5rem;
     }
+    .cards_container {
+        justify-content: center;
+        align-items: center;
+    }
     /* .modal .modal_content form .input{
         width: 20rem;
     } */
