@@ -9,7 +9,7 @@ const delete1 = `
 </svg>
 `;
 
-const addTask = (data)=>{
+const addTask = (data) => {
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
     data.map((item, key) => {
@@ -40,9 +40,12 @@ const addTask = (data)=>{
         `;
         tbody.appendChild(node);
     });
-}
+};
 
-
+const myInput = document.getElementById("query");
+myInput.addEventListener("input",(e)=>{
+    console.log(e.target.value);
+})
 
 // adding new task
 const handleAdd = (e) => {
@@ -50,16 +53,21 @@ const handleAdd = (e) => {
     const name = document.querySelector("#name").value;
     const title = document.querySelector("#title").value;
     const option = document.querySelector("#category").value;
+    const optionMob = document.querySelector(".categoryMob").value;
     const date = document.querySelector("#date").value;
+    const dateMob = document.querySelector(".dateMob").value;
+    const finalOption = option === "0" ? optionMob : option;
+    const finalDate = date === "" ? dateMob : date;
+    console.log(finalOption, finalDate);
     if (name === "" || title === "") {
         alert("Please fill all the fields");
         return;
     }
-    if (option === "0") {
+    if (finalOption === "0") {
         alert("Please select a category");
         return;
     }
-    if (date === "") {
+    if (finalDate === "") {
         alert("Please select a date");
         return;
     }
@@ -70,8 +78,8 @@ const handleAdd = (e) => {
         id: idTime,
         name,
         title,
-        date: date,
-        category: option,
+        date: finalDate,
+        category: finalOption,
     };
     const tbody = document.querySelector("tbody");
     const node = document.createElement("tr");
@@ -83,8 +91,8 @@ const handleAdd = (e) => {
         ${name}
         </td>
         <td>${title}</td>
-        <td>${option}</td>
-        <td>${date}</td>
+        <td>${finalOption}</td>
+        <td>${finalDate}</td>
         <td>
         <div class="btn_container">
         <button onclick="modalClick(event)" class="btn btn-danger" id="update">
@@ -102,7 +110,9 @@ const handleAdd = (e) => {
     document.querySelector("#title").value = "";
     document.querySelector("#category").value = "";
     document.querySelector("#date").value = "";
-    if(data.length === 0){
+    document.querySelector(".categoryMob").value = "";
+    document.querySelector(".dateMob").value = "";
+    if (data.length === 0) {
         window.location.reload();
     }
 };
@@ -122,7 +132,7 @@ const handleUpdate = () => {
     const date2 = document.querySelector("#date2").value;
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const findIndex = data.findIndex((item) => item.id === parseInt(id));
-    console.log("date2 ",date2);
+    console.log("date2 ", date2);
     data[findIndex] = {
         isChecked: false,
         id: data[findIndex].id,
@@ -149,7 +159,7 @@ const modalClick = (e) => {
     const title = td[4].innerHTML;
     const category = td[5].innerHTML;
     const date = td[6].innerHTML;
-    console.log("date ",date);
+    console.log("date ", date);
     document.querySelector("#id").value = id;
     document.querySelector("#name2").value = name;
     document.querySelector("#title2").value = title;
@@ -179,6 +189,37 @@ const handleSearch = () => {
     );
     addTask(searchedItems);
 };
+
+// voice search
+if ("webkitSpeechRecognition" in window) {
+    const recognition = new webkitSpeechRecognition();
+    // const output = document.getElementById("output");
+    const startButton = document.getElementById("voiceSearch");
+
+    // Set properties for the recognition object
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = "en-US"; // Set the language
+
+    // Event listener for the start button
+    startButton.addEventListener("click", () => {
+        recognition.start();
+    });
+
+    // Event listener for the recognition result
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        // output.textContent = transcript;
+        document.querySelector("#query").value = transcript;
+    };
+
+    // Event listener for errors
+    recognition.onerror = (event) => {
+        console.error("Recognition error:", event.error);
+    };
+} else {
+    console.error("Web Speech API is not supported in this browser.");
+}
 
 //filter in the list
 const handleFilter = () => {
