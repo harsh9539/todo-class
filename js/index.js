@@ -83,7 +83,7 @@ const handleAdd = (e) => {
         return;
     }
     if(new Date(finalDate).getTime() < new Date().getTime()){
-        alert("Please enter a valid date");
+        alert("Please select a valid date");
         return;
     }
     const data = JSON.parse(localStorage.getItem("todo")) || [];
@@ -174,6 +174,7 @@ const handleModal = () => {
 };
 
 const handleUpdate = () => {
+    
     const id = document.querySelector("#id").value;
     const name2 = document.querySelector("#name2").value;
     const title2 = document.querySelector("#title2").value;
@@ -181,6 +182,22 @@ const handleUpdate = () => {
     const date2 = document.querySelector("#date2").value;
     const data = JSON.parse(localStorage.getItem("todo")) || [];
     const findIndex = data.findIndex((item) => item.id === parseInt(id));
+    if (name2 === "" || title2 === "") {
+        alert("Please fill all the fields");
+        return;
+    }
+    if (category2 === "0") {
+        alert("Please select a category");
+        return;
+    }
+    if (date2 === "") {
+        alert("Please select a date");
+        return;
+    }
+    if(new Date(date2).getTime() < new Date().getTime()){
+        alert("Please select a valid date");
+        return;
+    }
     console.log("date2 ", date2);
     data[findIndex] = {
         isChecked: false,
@@ -320,7 +337,7 @@ const handleCheckBox = (e) => {
     localStorage.setItem("todo", JSON.stringify(data));
     if (e.target.checked) {
         node2.style.textDecoration = "line-through";
-        node.style.textDecorationColor = "black";
+        node2.style.textDecorationColor = "black";
         node2.style.opacity = 0.9;
     } else {
         node2.style.textDecoration = "none";
